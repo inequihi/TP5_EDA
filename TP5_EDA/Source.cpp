@@ -37,6 +37,7 @@ int main(int argc, char* argv[])
 
             std::cout.write(buf.data(), len);
         }
+
     }
     catch (std::exception& e)
     {
