@@ -139,12 +139,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AsyncDaytimeServer.cpp" />
-    <ClCompile Include="Server.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AsyncDaytimeServer.h" />
-    <ClInclude Include="Server.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

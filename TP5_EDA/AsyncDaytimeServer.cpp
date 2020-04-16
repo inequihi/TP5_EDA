@@ -92,8 +92,5 @@ void AsyncDaytimeServer::response_sent_cb(const boost::system::error_code& error
 
 std::string make_daytime_string()
 {
-#pragma warning(disable : 4996)
-	using namespace std; // For time_t, time and ctime;
-	time_t now = time(0);
-	return ctime(&now);
+	return std::string("banana");
 }
