@@ -2,6 +2,10 @@
 
 size_t write_callback(char* contents, size_t size, size_t numbermemb, void* userData);
 
+
+/*     CONTRUCTOR   */
+
+
 Client::Client()
 {
 	 setErr(curl_global_init(CURL_GLOBAL_ALL));
@@ -19,28 +23,53 @@ Client::Client()
 	}
 }
 
+
+/*     DESTRUCTOR   */
+
 Client::~Client()
 {
 	curl_easy_cleanup(curl_handler);
 }
 
-void Client::setErr(CURLcode err) { error = err; };    //setter
 
-CURLcode Client::getErr() { return error; };    //getter 
+
+/*     SETTER   */
+
+
+
+void Client::setErr(CURLcode err) { error = err; };   
+
+
+/*     GETTER   */ 
+
+
+CURLcode Client::getErr() { return error; };  
 CURL* Client::getCurlhand() { return curl_handler; };
+
+
+
+/*     FUNCIONES MIEMBRO   */
+
+
 
 
 void Client::curl_initial_set()
 {
-	curl_easy_setopt(curl_handler, CURLOPT_URL, "25.135.150.125");			// ACA HAY QUE PONER EL IP DEL QUE ES EL HOST !!!
+	curl_easy_setopt(curl_handler, CURLOPT_URL, "25.135.151.200");			//NO ENTIENDO QUE SERIA LOCAL HOST tipo Host: 127.0.0.1 CRLF ... CRLF ?
 	curl_easy_setopt(curl_handler, CURLOPT_PORT, 13);				//Escuchamos puerto 80
 	curl_easy_setopt(curl_handler, CURLOPT_VERBOSE, 1L);
-	curl_easy_setopt(curl_handler, CURLOPT_PROTOCOLS,CURLPROTO_ALL);
+	curl_easy_setopt(curl_handler, CURLOPT_PROTOCOLS,CURLPROTO_HTTP);
 	curl_easy_setopt(curl_handler, CURLOPT_WRITEFUNCTION, &write_callback);	//Mando toda la data recibida a funcion callback 
 	curl_easy_setopt(curl_handler, CURLOPT_WRITEDATA, (void*)&userData_);	//Paso la data guardada por callback en this->userData a donde???
 }
 
+
+
+
 /*COMENTARIO  --> copie la del ej getinmemory.c pero desps podemos armar una buena con <fstream>*/
+
+
+
 size_t write_callback(char* contents, size_t size, size_t cantmemb, void* CurrentUserData)
 {
 	size_t realsize = size * cantmemb;
@@ -57,7 +86,6 @@ size_t write_callback(char* contents, size_t size, size_t cantmemb, void* Curren
 	memcpy(&(mem->memory[mem->size]), contents, realsize);
 	mem->size += realsize;
 	mem->memory[mem->size] = 0;
-	printf("%s", contents);
 
 	return realsize;
 }
