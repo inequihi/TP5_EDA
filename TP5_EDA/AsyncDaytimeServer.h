@@ -17,6 +17,7 @@
 
 #include <boost\asio.hpp>
 #include <string>
+#include <boost\asio\ip\address.hpp>
 class AsyncDaytimeServer
 {
 public:
@@ -24,7 +25,7 @@ public:
 	~AsyncDaytimeServer();
 
 	void start();
-
+	
 private:
 	void wait_connection();
 	void answer();

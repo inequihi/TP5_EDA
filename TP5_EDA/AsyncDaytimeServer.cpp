@@ -4,17 +4,22 @@
 #include <string>
 #include <boost\bind.hpp>
 
-using boost::asio::ip::tcp;
+
+using  boost::asio::ip::tcp;
+using  boost::asio::ip::address;
 
 std::string make_daytime_string();
 
 
 AsyncDaytimeServer::AsyncDaytimeServer(boost::asio::io_context& io_context)
 	: context_(io_context),
-	acceptor_(io_context, tcp::endpoint(tcp::v4(), 13)),
+	acceptor_(io_context, tcp::endpoint(address::from_string("25.135.150.125"), 13)),
 	socket_(io_context)
 {
+	
+	
 }
+
 
 AsyncDaytimeServer::~AsyncDaytimeServer()
 {
@@ -92,5 +97,5 @@ void AsyncDaytimeServer::response_sent_cb(const boost::system::error_code& error
 
 std::string make_daytime_string()
 {
-	return std::string("banana");
+	return std::string("banana CRLF");
 }

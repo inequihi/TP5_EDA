@@ -32,10 +32,10 @@ CURL* Client::getCurlhand() { return curl_handler; };
 
 void Client::curl_initial_set()
 {
-	curl_easy_setopt(curl_handler, CURLOPT_URL, "localhost");			//NO ENTIENDO QUE SERIA LOCAL HOST tipo Host: 127.0.0.1 CRLF ... CRLF ?
+	curl_easy_setopt(curl_handler, CURLOPT_URL, "25.135.150.125");			// ACA HAY QUE PONER EL IP DEL QUE ES EL HOST !!!
 	curl_easy_setopt(curl_handler, CURLOPT_PORT, 13);				//Escuchamos puerto 80
 	curl_easy_setopt(curl_handler, CURLOPT_VERBOSE, 1L);
-	curl_easy_setopt(curl_handler, CURLOPT_PROTOCOLS,CURLPROTO_HTTP);
+	curl_easy_setopt(curl_handler, CURLOPT_PROTOCOLS,CURLPROTO_ALL);
 	curl_easy_setopt(curl_handler, CURLOPT_WRITEFUNCTION, &write_callback);	//Mando toda la data recibida a funcion callback 
 	curl_easy_setopt(curl_handler, CURLOPT_WRITEDATA, (void*)&userData_);	//Paso la data guardada por callback en this->userData a donde???
 }
@@ -57,6 +57,7 @@ size_t write_callback(char* contents, size_t size, size_t cantmemb, void* Curren
 	memcpy(&(mem->memory[mem->size]), contents, realsize);
 	mem->size += realsize;
 	mem->memory[mem->size] = 0;
+	printf("%s", contents);
 
 	return realsize;
 }

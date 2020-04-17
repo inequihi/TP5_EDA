@@ -24,11 +24,12 @@ public:
 	CURLcode getErr();
 	void setErr(CURLcode err);
 	CURL* getCurlhand();
+	userData userData_;
 
 private:
 	CURLcode error;
 	CURL* curl_handler;
-	userData userData_;
+	//userData userData_;
 };
 
 #endif //CLIENT_H
