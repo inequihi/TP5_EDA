@@ -4,16 +4,17 @@ size_t write_callback(char* contents, size_t size, size_t numbermemb, void* user
 
 Client::Client()
 {
-	error = curl_global_init(CURL_GLOBAL_ALL);
+	 setErr(curl_global_init(CURL_GLOBAL_ALL));
 
-	if (error == CURLE_OK)
+	if (getErr() == CURLE_OK)
 	{
 		curl_handler = curl_easy_init();
 		if (curl_handler)
 		{
 			curl_initial_set();
-			userData_.memory = (char*)malloc(1);
-			userData_.size = 0;
+			userData_.memory = (char*)malloc(1000);
+			userData_.size = 1;
+			userData_.nmemb = 1000;
 		}
 	}
 }
@@ -23,10 +24,16 @@ Client::~Client()
 	curl_easy_cleanup(curl_handler);
 }
 
+void Client::setErr(CURLcode err) { error = err; };    //setter
+
+CURLcode Client::getErr() { return error; };    //getter 
+CURL* Client::getCurlhand() { return curl_handler; };
+
+
 void Client::curl_initial_set()
 {
 	curl_easy_setopt(curl_handler, CURLOPT_URL, "localhost");			//NO ENTIENDO QUE SERIA LOCAL HOST tipo Host: 127.0.0.1 CRLF ... CRLF ?
-	curl_easy_setopt(curl_handler, CURLOPT_PORT, 80);				//Escuchamos puerto 80
+	curl_easy_setopt(curl_handler, CURLOPT_PORT, 13);				//Escuchamos puerto 80
 	curl_easy_setopt(curl_handler, CURLOPT_VERBOSE, 1L);
 	curl_easy_setopt(curl_handler, CURLOPT_PROTOCOLS,CURLPROTO_HTTP);
 	curl_easy_setopt(curl_handler, CURLOPT_WRITEFUNCTION, &write_callback);	//Mando toda la data recibida a funcion callback 
