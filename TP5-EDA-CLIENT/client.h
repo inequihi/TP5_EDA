@@ -5,7 +5,12 @@
 #include <string.h>
 #include <stdlib.h>
 #include <curl/curl.h>
+#include <string.h>
+#include <iostream>
+#include <fstream>				//Uso lireria fstream para leer y escribir archivos (aunque aca solo escribamos)
 
+#define MAXTOKENS 30
+using namespace std; 
 
 typedef struct 
 {
@@ -24,12 +29,16 @@ public:
 	CURLcode getErr();
 	void setErr(CURLcode err);
 	CURL* getCurlhand();
-	userData userData_;
+	userData userFileData;
+	bool storeMyFile(void);
+	bool checkCommand(int argc_, char* argv);
 
 private:
 	CURLcode error;
 	CURL* curl_handler;
-	//userData userData_;
+	char* host;
+	char* path;
+	char* filename;
 };
 
 #endif //CLIENT_H

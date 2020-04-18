@@ -1,23 +1,34 @@
 #include "client.h"
 
-int main(void)
+int main(int argc, char** argv)		//Por comando recibo host/path/filename
 {
-	Client client;
+	Client client;	
 
-	if(client.getCurlhand())
+	if (client.storeMyFile())
 	{
+		printf("FUNCIONO\n");
+
+	}
+	else
+		printf("no funciono :( \n");
 	
 
-		if (curl_easy_perform(client.getCurlhand())) 
+	if (client.getCurlhand())
+	{
+		if (curl_easy_perform(client.getCurlhand()))
 		{
+			//Leemos y usamos resultados
+			if (client.storeMyFile())
+			{
 
-			printf("ERROR:");
-
+			}
 		}
 	}
+		
 
 
 		
-	curl_global_cleanup();
+	client.~Client();
+
 	return 0;
 }
