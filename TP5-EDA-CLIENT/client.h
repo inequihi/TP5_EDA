@@ -16,7 +16,7 @@ typedef struct
 {
 	char* memory;
 	size_t size;
-	size_t nmemb;
+
 
 }userData;
 

@@ -19,7 +19,7 @@ Client::Client()
 			curl_initial_set();
 			userFileData.memory = (char*)malloc(1000);
 			userFileData.size = 1;
-			userFileData.nmemb = 1000;
+
 		}
 	}
 }
@@ -57,12 +57,13 @@ CURL* Client::getCurlhand() { return curl_handler; };
 
 void Client::curl_initial_set()
 {
-	curl_easy_setopt(curl_handler, CURLOPT_URL, "25.135.151.200");			
-	curl_easy_setopt(curl_handler, CURLOPT_PORT, 13);				//Escuchamos puerto 80
+	curl_easy_setopt(curl_handler, CURLOPT_URL, "25.135.150.125");			
+	curl_easy_setopt(curl_handler, CURLOPT_PORT, 80);				//Escuchamos puerto 80
 	curl_easy_setopt(curl_handler, CURLOPT_VERBOSE, 1L);
 	curl_easy_setopt(curl_handler, CURLOPT_PROTOCOLS,CURLPROTO_HTTP);
-	curl_easy_setopt(curl_handler, CURLOPT_WRITEFUNCTION, &write_callback);	//Mando toda la data recibida a funcion callback 
 	curl_easy_setopt(curl_handler, CURLOPT_WRITEDATA, (void*)&userFileData);	//Paso la data guardada por callback en this->userData a donde???
+	curl_easy_setopt(curl_handler, CURLOPT_WRITEFUNCTION, &write_callback);	//Mando toda la data recibida a funcion callback 
+
 }
 
 bool Client::checkCommand(int argc_, char* arguments_)
@@ -130,7 +131,6 @@ size_t write_callback(char* contents, size_t size, size_t cantmemb, void* Curren
 		printf("not enough memory (realloc returned NULL)\n");
 		return 0;
 	}
-
 	mem->memory = ptr;
 	memcpy(&(mem->memory[mem->size]), contents, realsize);
 	mem->size += realsize;
