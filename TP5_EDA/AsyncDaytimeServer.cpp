@@ -56,7 +56,7 @@ void AsyncDaytimeServer::wait_connection()
 void AsyncDaytimeServer::answer()
 {
 	std::cout << "answer()" << std::endl;
-	msg = make_daytime_string();
+	//msg = make_daytime_string();
 	boost::asio::async_write(
 		socket_,
 		boost::asio::buffer(msg),

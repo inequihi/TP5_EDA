@@ -8,12 +8,12 @@ int main(int argc, char** argv)		//Por comando recibo host/path/filename
 	//{
 		if (client.getCurlhand())
 		{
-			if (curl_easy_perform(client.getCurlhand()))
+			if (!(curl_easy_perform(client.getCurlhand())))
 			{
 				//Leemos y usamos resultados
 				if (client.storeMyFile())
 				{
-
+					
 				}
 			}
 			else

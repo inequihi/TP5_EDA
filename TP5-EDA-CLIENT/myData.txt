@@ -1,1 +1,373 @@
-Í
+Í<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Language" content="es-ar">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Page-Enter" content="RevealTrans(Duration=4,Transition=14)">
+<META name="policía" content="Corrientes,Policía de Corrientes,POLICIA">
+<title>POLICIA DE CORRIENTES</title>
+<script type="text/javascript" language="JavaScript1.2" src="stm31.js">
+</script>
+<script language="JavaScript" type="text/javascript">
+<!--
+<!-- Dummy comment to hide code from non-JavaScript browsers.
+
+if (document.images) {
+menulat_b1_off = new Image(); menulat_b1_off.src = "menulat_b1.gif"
+menulat_b1_over = new Image(); menulat_b1_over.src = "menulat_b1_over.gif"
+menulat_b2_off = new Image(); menulat_b2_off.src = "menulat_b2.gif"
+menulat_b2_over = new Image(); menulat_b2_over.src = "menulat_b2_over.gif"
+menulat_b3_off = new Image(); menulat_b3_off.src = "menulat_b3.gif"
+menulat_b3_over = new Image(); menulat_b3_over.src = "menulat_b3_over.gif"
+menulat_b4_off = new Image(); menulat_b4_off.src = "menulat_b4.gif"
+menulat_b4_over = new Image(); menulat_b4_over.src = "menulat_b4_over.gif"
+menulat_b5_off = new Image(); menulat_b5_off.src = "menulat_b5.gif"
+menulat_b5_over = new Image(); menulat_b5_over.src = "menulat_b5_over.gif"
+menulat_b6_off = new Image(); menulat_b6_off.src = "menulat_b6.gif"
+menulat_b6_over = new Image(); menulat_b6_over.src = "menulat_b6_over.gif"
+menulat_b7_off = new Image(); menulat_b7_off.src = "menulat_b7.gif"
+menulat_b7_over = new Image(); menulat_b7_over.src = "menulat_b7_over.gif"
+menulat_b8_off = new Image(); menulat_b8_off.src = "menulat_b8.gif"
+menulat_b8_over = new Image(); menulat_b8_over.src = "menulat_b8_over.gif"
+menulat_b9_off = new Image(); menulat_b9_off.src = "menulat_b9.gif"
+menulat_b9_over = new Image(); menulat_b9_over.src = "menulat_b9_over.gif"
+menulat_b10_off = new Image(); menulat_b10_off.src = "menulat_b10.gif"
+menulat_b10_over = new Image(); menulat_b10_over.src = "menulat_b10_over.gif"
+menulat_b11_off = new Image(); menulat_b11_off.src = "menulat_b11.gif"
+menulat_b11_over = new Image(); menulat_b11_over.src = "menulat_b11_over.gif"
+menulat_b12_off = new Image(); menulat_b12_off.src = "menulat_b12.gif"
+menulat_b12_over = new Image(); menulat_b12_over.src = "menulat_b12_over.gif"
+menulat_b13_off = new Image(); menulat_b13_off.src = "menulat_b13.gif"
+menulat_b13_over = new Image(); menulat_b13_over.src = "menulat_b13_over.gif"
+menulat_b14_off = new Image(); menulat_b14_off.src = "menulat_b14.gif"
+menulat_b14_over = new Image(); menulat_b14_over.src = "menulat_b14_over.gif"
+}
+
+function turn_off(ImageName) {
+	if (document.images != null) {
+		document[ImageName].src = eval(ImageName + "_off.src");
+	}
+}
+
+function turn_over(ImageName) {
+	if (document.images != null) {
+		document[ImageName].src = eval(ImageName + "_over.src");
+	}
+}
+
+// End of dummy comment -->
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//
+-->
+</script>
+<style type="text/css">
+<!--
+a:link {
+	color: #FFFFFF;
+}
+-->
+</style></head>
+</html>
+
+<html>
+<head>
+<!--
+function dynAnimation() {}
+function clickSwapImg() {}
+//-->
+</script>
+<bgsound src="graficos/sobredosis.mid" loop="-1">
+<style type="text/css">
+<!--
+#menu10 {        width: 200px;
+        margin: 10px;
+}
+.Estilo12 {
+	font-weight: bold;
+	color: #FFFFFF;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+.Estilo13 {color: #FFFFFF; font-family: Geneva, Arial, Helvetica, sans-serif; font-weight: bold;}
+.Estilo15 {color: #FFFFFF; font-family: Geneva, Arial, Helvetica, sans-serif; font-weight: bold; font-size: 12px; }
+.Estilo16 {font-size: 12px}
+-->
+</style>
+</head>
+
+<body bgcolor="#4B92C5" onLoad=" dynAnimation();MM_preloadImages('Corrientes5.gif','ctesnavidad-2.gif')">
+<!--Colocar en el BODY, puntero con puntos amarillos que giran -->
+<script language="JavaScript">
+<!--
+
+/*
+Dancing Stars cursor (Submitted by Kurt at kurt.grigg@virgin.net)
+Modified and permission granted to Dynamic Drive to feature script in archive
+For full source, usage terms, and 100's more DHTML scripts, visit http://dynamicdrive.com
+*/
+
+if (document.all){
+document.write('<div id="starsDiv" style="position:absolute;top:0px;left:0px">')
+for (xy=0;xy<7;xy++)
+document.write('<div style="position:relative;width:3px;height:3px;background:#FFFF00;font-size:2px;visibility:visible"></div>')
+document.write('</div>')
+}
+
+if (document.layers)
+{window.captureEvents(Event.MOUSEMOVE);}
+var yBase = 200;
+var xBase = 200;
+var yAmpl = 10;
+var yMax = 40;
+var step = .2;
+var ystep = .5;
+var currStep = 0;
+var tAmpl=1;
+var Xpos = 1;
+var Ypos = 1;
+var i = 0;
+var j = 0;
+
+if (document.all)
+{
+  function MoveHandler(){
+  Xpos = document.body.scrollLeft+event.x;
+  Ypos = document.body.scrollTop+event.y;
+  }
+  document.onmousemove = MoveHandler; 
+}
+
+else if (document.layers)
+{
+  function xMoveHandler(evnt){
+  Xpos = evnt.pageX;
+  Ypos = evnt.pageY;
+  }
+  window.onMouseMove = xMoveHandler;
+}
+
+
+
+function animateLogo() {
+if (document.all)
+{
+ yBase = window.document.body.offsetHeight/4;
+ xBase = window.document.body.offsetWidth/4;
+}
+else if (document.layers)
+{
+ yBase = window.innerHeight/4 ;
+ xBase = window.innerWidth/4;
+}
+
+if (document.all)
+{
+var totaldivs=document.all.starsDiv.all.length
+ for ( i = 0 ; i < totaldivs ; i++ )
+ {
+var tempdiv=document.all.starsDiv.all[i].style
+  tempdiv.top = Ypos + Math.cos((20*Math.sin(currStep/20))+i*70)*yBase*(Math.sin(10+currStep/10)+0.2)*Math.cos((currStep + i*25)/10);
+  tempdiv.left = Xpos + Math.sin((20*Math.sin(currStep/20))+i*70)*xBase*(Math.sin(10+currStep/10)+0.2)*Math.cos((currStep + i*25)/10);
+ }
+}
+
+else if (document.layers)
+{
+ for ( j = 0 ; j < 7 ; j++ ) 
+ {
+var templayer="a"+j
+  document.layers[templayer].top = Ypos + Math.cos((20*Math.sin(currStep/20))+j*70)*yBase*(Math.sin(10+currStep/10)+0.2)*Math.cos((currStep + j*25)/10);
+  document.layers[templayer].left =Xpos + Math.sin((20*Math.sin(currStep/20))+j*70)*xBase*(Math.sin(10+currStep/10)+0.2)*Math.cos((currStep + j*25)/10);
+ }
+}
+currStep += step;
+setTimeout("animateLogo()", 15);
+}
+animateLogo();
+// -->
+</script>
+<div align="center">
+  <p style="line-height: 100%; margin-top: 10; margin-bottom: 10"><img src="cartel_policia.gif" width="589" height="102"></p>
+  <p style="line-height: 100%; margin-top: 10; margin-bottom: 10">&nbsp;</p>
+  <p style="line-height: 100%; margin-top: 10; margin-bottom: 10"><font face="Arial" size="2"><span style="background-color: #FFFFFF">Para
+            ver los componentes de &eacute;sta
+  p&aacute;gina necesita Java y Adobe Flash Player.</span></font></p>
+</div>
+<div align="center"></div>
+<div align="center">
+  <table width="977" height="799" border="0">
+    
+    <tr>
+      <td width="266" height="646"><div align="center">
+        <table border="0" cellspacing="0" cellpadding="0" width="241">
+          <tr>
+            <td><img src="menulat_top.gif" alt="" width="263" height="64"></td>
+          </tr>
+          <tr>
+            <td><p><a href="http://www.policiactes.gov.ar/index.htm" onMouseOut="turn_off('menulat_b1')" onMouseOver="turn_over('menulat_b1')" ><img name="menulat_b1" src="menulat_b1.gif" alt="" width="263" height="30" border="0"></a></p></td>
+          </tr>
+          <tr>
+            <td><a href="http://www.policiactes.gov.ar/resea.htm" onMouseOut="turn_off('menulat_b2')" onMouseOver="turn_over('menulat_b2')" ><img name="menulat_b2" src="menulat_b2.gif" alt="" width="263" height="30" border="0"></a></td>
+          </tr>
+          <tr>
+            <td><a href="http://www.policiactes.gov.ar/telefonos.html" onMouseOut="turn_off('menulat_b3')" onMouseOver="turn_over('menulat_b3')" ><img name="menulat_b3" src="menulat_b3.gif" alt="" width="263" height="30" border="0"></a></td>
+          </tr>
+          <tr>
+            <td><a href="http://www.policiactes.gov.ar/institutos.htm" onMouseOut="turn_off('menulat_b4')" onMouseOver="turn_over('menulat_b4')" ><img name="menulat_b4" src="menulat_b4.gif" alt="" width="263" height="30" border="0"></a></td>
+          </tr>
+          
+          <tr>
+            <td><a href="http://www.policiactes.gov.ar/seguridad.htm" onMouseOut="turn_off('menulat_b5')" onMouseOver="turn_over('menulat_b5')" ><img name="menulat_b5" src="menulat_b5.gif" alt="" width="263" height="30" border="0"></a><a href="http://www.policiactes.gov.ar/requisit.htm" onMouseOut="turn_off('menulat_b6')" onMouseOver="turn_over('menulat_b6')" ></a></td>
+          </tr>
+          <tr>
+            <td><a href="http://www.policiactes.gov.ar/requisit.htm" onMouseOut="turn_off('menulat_b6')" onMouseOver="turn_over('menulat_b6')" ><img name="menulat_b6" src="menulat_b6.gif" alt="" width="263" height="30" border="0"></a><a href="http://www.policiactes.gov.ar/fotos.htm" onMouseOut="turn_off('menulat_b7')" onMouseOver="turn_over('menulat_b7')" ></a></td>
+          </tr>
+          <tr>
+            <td><a href="http://www.policiactes.gov.ar/fotos.htm" onMouseOut="turn_off('menulat_b7')" onMouseOver="turn_over('menulat_b7')" ><img name="menulat_b7" src="menulat_b7.gif" alt="" width="263" height="30" border="0"></a><a href="http://www.policiactes.gov.ar/icriminal.htm" onMouseOut="turn_off('menulat_b8')" onMouseOver="turn_over('menulat_b8')" ></a></td>
+          </tr>
+          <tr>
+            <td><a href="http://www.policiactes.gov.ar/icriminal.htm" onMouseOut="turn_off('menulat_b8')" onMouseOver="turn_over('menulat_b8')" ><img name="menulat_b8" src="menulat_b8.gif" alt="" width="263" height="30" border="0"></a><a href="http://www.policiactes.gov.ar/dadmin.htm" onMouseOut="turn_off('menulat_b9')" onMouseOver="turn_over('menulat_b9')" ></a></td>
+          </tr>
+          
+          <tr>
+            <td><a href="http://www.policiactes.gov.ar/MEIndex.html" onMouseOut="turn_off('menulat_b10')" onMouseOver="turn_over('menulat_b10')" ><img name="menulat_b10" src="menulat_b10.gif" alt="" width="263" height="30" border="0"></a><a href="http://www.policiactes.gov.ar/MAIndex.html" onMouseOut="turn_off('menulat_b11')" onMouseOver="turn_over('menulat_b11')" ></a></td>
+          </tr>
+          <tr>
+            <td><a href="http://www.policiactes.gov.ar/MAIndex.html" onMouseOut="turn_off('menulat_b11')" onMouseOver="turn_over('menulat_b11')" ><img name="menulat_b11" src="menulat_b11.gif" alt="" width="263" height="30" border="0"></a><a href="http://www.policiactes.gov.ar/caminera-t.htm" onMouseOut="turn_off('menulat_b12')" onMouseOver="turn_over('menulat_b12')" ></a></td>
+          </tr>
+          <tr>
+            <td><a href="http://www.policiactes.gov.ar/caminera-t.htm" onMouseOut="turn_off('menulat_b12')" onMouseOver="turn_over('menulat_b12')" ><img name="menulat_b12" src="menulat_b12.gif" alt="" width="263" height="30" border="0"></a><a href="http://www.policiactes.gov.ar/pri.html" onMouseOut="turn_off('menulat_b14')" onMouseOver="turn_over('menulat_b14')" ></a></td>
+          </tr>
+          <tr>
+            <td><a href="http://www.policiactes.gov.ar/pri.html" onMouseOut="turn_off('menulat_b14')" onMouseOver="turn_over('menulat_b14')" ><img name="menulat_b14" src="menulat_b14.gif" alt="" width="263" height="30" border="0"></a><a href="http://www.policiactes.gov.ar/Link.html" onMouseOut="turn_off('menulat_b13')" onMouseOver="turn_over('menulat_b13')" ></a></td>
+          </tr>
+          <tr>
+            <td><a href="http://www.policiactes.gov.ar/Link.html" onMouseOut="turn_off('menulat_b13')" onMouseOver="turn_over('menulat_b13')" ><img name="menulat_b13" src="menulat_b13.gif" alt="" width="263" height="30" border="0"></a></td>
+          </tr>
+          <tr>
+            <td><a href="http://www.policiactes.gov.ar/index.htm" onMouseOut="turn_off('menulat_b1')" onMouseOver="turn_over('menulat_b1')" ><img src="menulat_bottom.gif" alt="" width="263" height="64" border="0"></a></td>
+          </tr>
+        </TABLE>
+        <p><a href="http://www.policiactes.gov.ar/Autoridades.html"><img src="Autoridades.JPG" alt=" " width="154" height="42" border="0"></a></p>
+        <p><a href="http://www.policiactes.gov.ar/comisarias_c.html"><img src="CriasCapGoogleMaps/boton_Cria1.gif" width="157" height="50" border="0"></a></p>
+        <p><a href="http://jp.policiactes.gov.ar/campus/login/index.php"><img src="AccesoCAMPUS.jpg" width="171" height="61" border="0"></a></p>
+      </div></td>
+      <td align="center" valign="top"><div align="center">
+        <p style="line-height: 100%; margin-top: 10; margin-bottom: 10">&nbsp;</p>
+        </div>
+        <p><img src="Escudo-con-marco-dorado_ani.gif" alt="escopol" width="368" height="449" longdesc="ESCUDO POLICIA DE CORRIENTES"></p>
+        <p>&nbsp;</p>
+        <p><a href="programa_y_temas_OF_POL_2020.pdf"></a></p></td>
+      <td width="10"><div align="center">
+        <table width="200" border="0" bgcolor="#009900" style="margin-bottom: 10">
+          <tr>
+            <td><p><a href="http://www.corrientes.gob.ar" target="_blank"><img src="LogoGobCtes.png" width="206" height="82" border="0"></a></p>              </td>
+          </tr>
+        </table>
+        <table width="212" height="102" border="0" bgcolor="#4B92C5">
+          <tr>
+            <td class="Estilo12"><p align="center"><a href="http://www.policiactes.gov.ar/relaciones/index.html" target="_blank"><img src="relaciones.png" width="205" height="85" border="0"></a></p></td>
+          </tr>
+        </table>
+        <p style="line-height: 100%; margin-top: 10; margin-bottom: 10">&nbsp;</p>
+        <p style="line-height: 100%; margin-top: 10; margin-bottom: 10"><img border="0" src="itati-2.gif" width="179" height="272"></p>
+        <p style="line-height: 100%; margin-top: 10; margin-bottom: 10">&nbsp;</p>
+      </div>
+        <p align="center"><img src="Logo911-p.gif" alt="911" name="ctes911" width="117" height="123" id="ctes911"><img src="solo_capital.gif" name="areacapital" width="125" height="20" border="0" id="areacapital"></p>
+      <p align="center">&nbsp;</p></td>
+    </tr>
+    <tr>
+      <td width="266" bgcolor="#4B92C5"><div align="center">
+        <div align="center">
+          <p><img src="100%20copia.gif" name="bomberos100" width="115" height="53" border="0" id="bomberos100"><img src="100p%20copia.gif" name="policia101" width="122" height="51" border="0" id="policia101"></p>
+          <p><img src="Interior.gif" name="interior" width="96" height="20" border="0" id="interior"></p>
+        </div>
+      </div></td>
+      <td bordercolor="#000066"><div align="center">
+        <div align="center">
+          <p><font size="3"><font face="Arial">En caso de</font><font color="#FFFFFF"> </font><font face="Arial"><font color="#FFCC00"><b>URGENCIA</b></font><font color="#FFFFFF"> </font>comunicarse </font></font></p>
+          <p><font size="3"><font face="Arial">a los tel&eacute;fonos gratuitos las 24 hs.</font></font></p>
+        </div>
+      </div>
+      <p align="center">&nbsp;</p></td>
+      <td width="179" bordercolor="#000066" bgcolor="#4B92C5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="3"><hr size="0" color="#FFCC00"></td>
+    </tr>
+  </table>
+  <table width="977" height="44" border="0">
+    <tr>
+      <td width="266" height="40" bgcolor="#4B92C5">&nbsp;</td>
+      <td bgcolor="#4B92C5">&nbsp;</td>
+      <td width="179" bgcolor="#4B92C5">&nbsp;</td>
+    </tr>
+</table>
+  <table width="105%" border="0" cellspacing="0">
+    <tr bgcolor="#FFFFFF">
+      <td bgcolor="#4B92C5"><p align="center">&nbsp;
+            <!-- http://contadores.miarroba.com  -->
+              <!-- <script type="text/javascript" src="http://contadores.miarroba.com/ver.php?id=608973"></script> -->
+              <!-- http://contadores.miarroba.com  -->
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3"><p align="center"> &nbsp;&nbsp;&nbsp; </td>
+    </tr>
+    <tr>
+      <td width="100%" colspan="3" bgcolor="#FFFFFF"><p align="center" style="word-spacing: 0; margin-top: 1; margin-bottom: 1"> <a href="index.htm"><font size="1" face="Verdana">Inicio</font></a><font size="1" face="Verdana">&nbsp; <a href="http://www.policiactes.gov.ar/telefonos.html">Tel&eacute;fonos</a>&nbsp; <a href="institutos.htm">Institutos</a>&nbsp; <a href="requisit.htm">Documentaci&oacute;n</a> <a href="seguridad.htm">Consejos
+        P&uacute;blicos</a>&nbsp; <a href="fotos.htm">Galer&iacute;a de Fotos</a>&nbsp; </font><font color="#FFFFFF" face="Verdana" size="1"></font><a href="icriminal.htm"><font color="#0000FF" face="Verdana" size="1">Dpto.
+          Intelig.Crimimal</font> </a><font color="#0000FF" face="Verdana" size="1">&nbsp; </font> </td>
+    </tr>
+    <tr>
+      <td width="100%" colspan="3"><hr size="3" color="#FFCC00">
+          <p align="center" style="line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Times New Roman" size="2">Copyright
+            &copy; 2005-2010 Polic&iacute;a de Corrientes - Dise&ntilde;o: Departamento de Comunicaciones e
+            Inform&aacute;tica - Divisi&oacute;n Inform&aacute;tica&nbsp;&nbsp;</font></p>
+        <p align="center" style="line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Times New Roman" size="2">&nbsp;Actualizado
+          el 01 de Agosto de 2016 </font></p></td>
+    </tr>
+  </table>
+</div>
+  <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-39305846-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+
+</html>
+
+
