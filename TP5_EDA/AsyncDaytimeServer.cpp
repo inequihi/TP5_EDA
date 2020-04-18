@@ -13,7 +13,7 @@ std::string make_daytime_string();
 
 AsyncDaytimeServer::AsyncDaytimeServer(boost::asio::io_context& io_context)
 	: context_(io_context),
-	acceptor_(io_context, tcp::endpoint(address::from_string("25.135.150.125"), 13)),
+	acceptor_(io_context, tcp::endpoint(address::from_string("25.135.150.125"), 80)),
 	socket_(io_context)
 {
 	
@@ -97,5 +97,12 @@ void AsyncDaytimeServer::response_sent_cb(const boost::system::error_code& error
 
 std::string make_daytime_string()
 {
-	return std::string("banana CRLF");
+	std::string msg1("HTTP/11.1 404 NOT FOUND CRLF");
+	std::string msg2("DATE: CRLF");
+	std::string msg3("CACHE-CONTROL CRLF");
+	std::string msg4("EXPIRES: CRLF");
+	std::string msg5("LENGTH CRLF");
+	std::string msg6("type CRLF");
+
+	return msg1 + msg2 + msg3 + msg4 + msg5 + msg6;
 }
