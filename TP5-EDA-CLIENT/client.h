@@ -36,9 +36,9 @@ public:
 private:
 	CURLcode error;
 	CURL* curl_handler;
-	char* host;
-	char* path;
-	char* filename;
+	std::string host;
+	std::string path;
+	std::string filename;
 };
 
 #endif //CLIENT_H

@@ -8,6 +8,7 @@ size_t write_callback(char* contents, size_t size, size_t numbermemb, void* user
 
 Client::Client()
 {
+	
 	 setErr(curl_global_init(CURL_GLOBAL_ALL));
 
 	if (getErr() == CURLE_OK)
@@ -28,9 +29,9 @@ Client::Client()
 
 Client::~Client()
 {
-	curl_easy_cleanup(curl_handler);
 	curl_global_cleanup();
 }
+
 
 
 
@@ -64,38 +65,35 @@ void Client::curl_initial_set()
 	curl_easy_setopt(curl_handler, CURLOPT_WRITEDATA, (void*)&userFileData);	//Paso la data guardada por callback en this->userData a donde???
 }
 
-bool Client::checkCommand(int argc_, char* arguments)
+bool Client::checkCommand(int argc_, char* arguments_)
 {
+	std::string arguments;
+
+
 	if (argc_ == 2)
 	{
-		char* tokens[MAXTOKENS] = {  };			//Array temporal para host/path/filename 
-		char* tokenPtr = std::strtok(arguments, "/");
-		int i, totalTokens = 0;
-		while (tokenPtr != NULL && totalTokens < MAXTOKENS)
+		arguments = arguments_;
+		int firstSlash, lastSlash, totalChars;
+		firstSlash = arguments.find('/');			//https://www.cplusplus.com/reference/string/string/find/?kw=string%3A%3Afind
+		totalChars = sizeof(arguments) / sizeof('a');
+		
+		if ( firstSlash != std::string::npos)
 		{
-			tokens[totalTokens] = tokenPtr;
-			tokenPtr = std::strtok(NULL, "/");
-		}
+			this->host.assign(arguments, 0, firstSlash);					//Le cargo el host a la clase
+			this->path.assign(arguments, firstSlash + 1, totalChars - firstSlash + 1);   //Le cargo path a la clase
 
-		this->host = tokens[0];
-		this->filename = tokens[totalTokens];
-		this->path = tokens[2];
-		for (i = 3; i < totalTokens; i++)
-		{
-			std::strcat(this->path, tokens[i]);
-			std::strcat(this->path, "/");
+			lastSlash = arguments.find_last_of('/');
+			this->filename.assign(arguments,lastSlash, totalChars - lastSlash + 1);			//Fuardo el filename
+			
+			cout << this->host << endl << this->path << endl << this->filename << endl;
 		}
-
-		cout << this->host << endl;
-		cout << this->path << endl;
-		cout << this->filename << endl;
 
 		return true;
 	}
 	else 
 		return false;
 }
-
+	
 
 bool Client::storeMyFile(void)
 {
