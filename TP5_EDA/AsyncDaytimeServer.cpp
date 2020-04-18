@@ -96,13 +96,35 @@ void AsyncDaytimeServer::response_sent_cb(const boost::system::error_code& error
 
 
 std::string make_daytime_string()
-{
-	std::string msg1("HTTP/11.1 404 NOT FOUND CRLF");
+{	
+char CR = 0x0D;
+	char LF = 0x0A;
+	std::string msg1("HTTP/11.1 404 NOT FOUND ");
 	std::string msg2("DATE: CRLF");
 	std::string msg3("CACHE-CONTROL CRLF");
 	std::string msg4("EXPIRES: CRLF");
 	std::string msg5("LENGTH CRLF");
 	std::string msg6("type CRLF");
+
+
+	msg1 += CR;
+	msg1 += LF;
+
+	msg2 += CR;
+	msg2 += LF;
+
+	msg3 += CR;
+	msg3 += LF;
+
+	msg4 += CR;
+	msg4 += LF;
+
+
+	msg5 += CR;
+	msg5 += LF;
+
+	msg6 += CR;
+	msg6 += LF;
 
 	return msg1 + msg2 + msg3 + msg4 + msg5 + msg6;
 }
