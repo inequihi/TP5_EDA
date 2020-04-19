@@ -23,7 +23,7 @@ typedef struct
 class Client
 {
 public:
-	Client();
+	Client(int argc, char* argv_);
 	~Client();
 	void curl_initial_set(void);
 	CURLcode getErr();
@@ -36,6 +36,7 @@ public:
 private:
 	CURLcode error;
 	CURL* curl_handler;
+	std::string Cmd4Server;
 	std::string host;
 	std::string path;
 	std::string filename;

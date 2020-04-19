@@ -6,22 +6,25 @@ size_t write_callback(char* contents, size_t size, size_t numbermemb, void* user
 /*     CONSTRUCTOR   */
 
 
-Client::Client()
+Client::Client(int argc_, char* argv_)
 {
-	
-	 setErr(curl_global_init(CURL_GLOBAL_ALL));
-
-	if (getErr() == CURLE_OK)
+	if (checkCommand(argc_, argv_))
 	{
-		curl_handler = curl_easy_init();
-		if (curl_handler)
-		{
-			curl_initial_set();
-			userFileData.memory = (char*)malloc(1000);
-			userFileData.size = 1;
+		setErr(curl_global_init(CURL_GLOBAL_ALL));
 
+		if (getErr() == CURLE_OK)
+		{
+			curl_handler = curl_easy_init();
+			if (curl_handler)
+			{
+				curl_initial_set();
+				userFileData.memory = (char*)malloc(1000);
+				userFileData.size = 1;
+
+			}
 		}
 	}
+
 }
 
 
@@ -54,7 +57,18 @@ CURL* Client::getCurlhand() { return curl_handler; };
 
 
 
+void Client::curl_initial_set()
+{
+	curl_easy_setopt(curl_handler, CURLOPT_URL, (this->Cmd4Server).c_str());
+	curl_easy_setopt(curl_handler, CURLOPT_PORT, 80);				//Escuchamos puerto 80
+	curl_easy_setopt(curl_handler, CURLOPT_VERBOSE, 1L);
+	curl_easy_setopt(curl_handler, CURLOPT_PROTOCOLS, CURLPROTO_HTTP);
+	curl_easy_setopt(curl_handler, CURLOPT_WRITEDATA, (void*)&userFileData);	//Paso la data guardada por callback en this->userData a donde???
+	curl_easy_setopt(curl_handler, CURLOPT_WRITEFUNCTION, &write_callback);	//Mando toda la data recibida a funcion callback 
 
+}
+
+/*
 void Client::curl_initial_set()
 {
 	curl_easy_setopt(curl_handler, CURLOPT_URL, "http://www.policiactes.gov.ar/");			
@@ -63,8 +77,8 @@ void Client::curl_initial_set()
 	curl_easy_setopt(curl_handler, CURLOPT_PROTOCOLS,CURLPROTO_HTTP);
 	curl_easy_setopt(curl_handler, CURLOPT_WRITEDATA, (void*)&userFileData);	//Paso la data guardada por callback en this->userData a donde???
 	curl_easy_setopt(curl_handler, CURLOPT_WRITEFUNCTION, &write_callback);	//Mando toda la data recibida a funcion callback 
-
 }
+*/
 
 bool Client::checkCommand(int argc_, char* arguments_)
 {
@@ -83,10 +97,9 @@ bool Client::checkCommand(int argc_, char* arguments_)
 			this->host.assign(arguments, 0, firstSlash);					//Le cargo el host a la clase
 			this->path.assign(arguments, firstSlash + 1, totalChars - firstSlash + 1);   //Le cargo path a la clase
 
-			lastSlash = arguments.find_last_of('/');
-			this->filename.assign(arguments,lastSlash, totalChars - lastSlash + 1);			//Fuardo el filename
+			this->Cmd4Server = "GET/" + this->path + "HTTP/1.1\r\nHost:" + this->host + "\r\n";
 			
-			cout << this->host << endl << this->path << endl << this->filename << endl;
+			//cout << this->host << endl << this->path << endl;
 		}
 
 		return true;
@@ -98,8 +111,9 @@ bool Client::checkCommand(int argc_, char* arguments_)
 
 bool Client::storeMyFile(void)
 {
-	ofstream MyFile("myData.txt",ios::binary);		//creo archivo 
-	
+	std::ofstream MyFile;
+	MyFile.open("MyNewData.txt", ios::binary);		//creo archivo 
+
 	if (MyFile.is_open())		//verifico si se creo y puedo abrirlo
 	{
 		MyFile.write(this->userFileData.memory, this->userFileData.size);		//escribo lo que me devolvio server en un archivo
@@ -114,10 +128,6 @@ bool Client::storeMyFile(void)
 		return false;
 	}	
 }
-
-
-/*COMENTARIO  --> copie la del ej getinmemory.c pero desps podemos armar una buena con <fstream>*/
-
 
 
 size_t write_callback(char* contents, size_t size, size_t cantmemb, void* CurrentUserData)
