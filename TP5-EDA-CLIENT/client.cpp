@@ -88,7 +88,7 @@ bool Client::checkCommand(int argc_, char* arguments_)
 	if (argc_ == 2)
 	{
 		arguments = arguments_;
-		int firstSlash, lastSlash, totalChars;
+		unsigned int firstSlash, lastSlash, totalChars;
 		firstSlash = arguments.find('/');			//https://www.cplusplus.com/reference/string/string/find/?kw=string%3A%3Afind
 		totalChars = sizeof(arguments) / sizeof('a');
 		
@@ -97,7 +97,7 @@ bool Client::checkCommand(int argc_, char* arguments_)
 			this->host.assign(arguments, 0, firstSlash);					//Le cargo el host a la clase
 			this->path.assign(arguments, firstSlash + 1, totalChars - firstSlash + 1);   //Le cargo path a la clase
 
-			this->Cmd4Server = "GET/" + this->path + "HTTP/1.1\r\nHost:" + this->host + "\r\n";
+			this->Cmd4Server = this->host + '/' + this->path;
 			
 			//cout << this->host << endl << this->path << endl;
 		}
@@ -141,11 +141,10 @@ size_t write_callback(char* contents, size_t size, size_t cantmemb, void* Curren
 		printf("not enough memory (realloc returned NULL)\n");
 		return 0;
 	}
-	printf("\n\n SOY CALLBAAACKKK \n\n");
+//	printf("\n\n SOY CALLBAAACKKK \n\n");
 	mem->memory = ptr;
 	memcpy(&(mem->memory[mem->size]), contents, realsize);
 	mem->size += realsize;
 	mem->memory[mem->size] = 0;
-
 	return realsize;
 }
