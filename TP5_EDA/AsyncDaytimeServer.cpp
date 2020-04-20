@@ -62,7 +62,7 @@ void AsyncDaytimeServer::connection_received_cb(const boost::system::error_code&
 		
 		boost::asio::async_read(
 			socket_,
-			boost::asio::buffer(ClientInput),  //Buffer guarda temrinando en \0
+			boost::asio::buffer(&ClientInput[0],MAX),  //Buffer guarda temrinando en \0
 			boost::asio::transfer_all(),
 			boost::bind(&AsyncDaytimeServer::inputHandler,
 				this,
