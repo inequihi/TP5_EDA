@@ -21,7 +21,7 @@
 #include <boost/lexical_cast.hpp>
 #include<fstream>
 
-#define MAX 20
+#define MAX 100
 enum result { NO, YES};
 
 class AsyncDaytimeServer
@@ -41,7 +41,7 @@ private:
 	void server_Output(unsigned int y_n);
 	std::string msg;
 		//TAL VEZ USAR BOOST::ARRAY PARA client input
-	char ClientInput[MAX];
+	char ClientInput[1000];
 	size_t FileLenght; 
 	bool flag;
 	std::string ClientInputStr;

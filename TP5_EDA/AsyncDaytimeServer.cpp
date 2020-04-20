@@ -13,7 +13,7 @@ std::string make_daytime_string();
 
 AsyncDaytimeServer::AsyncDaytimeServer(boost::asio::io_context& io_context)
 	: context_(io_context),
-	acceptor_(io_context, tcp::endpoint(address::from_string("25.135.158.40"), 80)),
+	acceptor_(io_context, tcp::endpoint(address::from_string("25.135.150.125"), 80)),
 	socket_(io_context)
 {
 	
@@ -60,32 +60,39 @@ void AsyncDaytimeServer::connection_received_cb(const boost::system::error_code&
 	if (!error) {
 		/* http://charette.no-ip.com:81/programming/doxygen/boost/group__async__read.html */
 		
-		boost::asio::async_read(
-			socket_,
-			boost::asio::buffer(ClientInput),  //Buffer guarda temrinando en \0
-			boost::asio::transfer_all(),
+
+		socket_.async_receive(
+			
+			boost::asio::buffer(ClientInput,10000),  //Buffer guarda temrinando en \0
+			0,
 			boost::bind(&AsyncDaytimeServer::inputHandler,
 				this,
 				boost::asio::placeholders::error,
 				boost::asio::placeholders::bytes_transferred)
 			);	
+
 		
-		if(flag)
-		{				//Verificamos que se enviaron los comandos validos guardados en ClientInput[]
-			std::cout << "VOY A VERIFICAR /n" << std::endl;
-			char validInput[] = "GET /Desktop/trend.txt HTTP/1.1\r\nHost: 25.135.158.40\r\n";
-			if ((strcmp(ClientInput, validInput)) == 0)
-			{
-				std::cout << "FUE CORRECTO /n" << std::endl;				//Si el input fue correcto vamos a mandarle el archivo al Client
-				answer();
-				server_Output(YES);
-			}
-			else
-			{
-				server_Output(NO);
-			}
-		}
-		//wait_connection();		//NO ESTOY SEGURA SI ACA TENDRIA Q COMENTAR ESTO
+		
+		std::cout << flag << std::endl;
+
+		//if(flag)
+		//{				//Verificamos que se enviaron los comandos validos guardados en ClientInput[]
+		//	std::cout << "VOY A VERIFICAR /n" << std::endl;
+		//	
+		//	std::cout << ClientInput << std::endl;
+
+		//	if ((strcmp(ClientInput, validInput)) == 0)
+		//	{
+		//		std::cout << "FUE CORRECTO /n" << std::endl;				//Si el input fue correcto vamos a mandarle el archivo al Client
+		//		answer();
+		//		server_Output(YES);
+		//	}
+		//	else
+		//	{
+		//		server_Output(NO);
+		//	}
+		//}
+	 //   wait_connection();		//NO ESTOY SEGURA SI ACA TENDRIA Q COMENTAR ESTO
 	}
 	else {
 		std::cout << error.message() << std::endl;
@@ -97,14 +104,43 @@ void AsyncDaytimeServer::inputHandler(const boost::system::error_code& err,
 	std::size_t bytes_transferred)
 {
 	std::cout << "checkClientInput()\n" << std::endl;
-
+	//char validInput[] = "GET /Desktop/trend.txt HTTP/1.1\r\nHost: 25.135.150.125\r\n Accept: */*\r\n\r\n";
 	if (!err)
 	{
-		std::cout << "Error en client input \n";
-		flag = false;
+		std::cout << " No hay Error en client input \n";
+		
+		flag = TRUE;
 	}
 	else
-		flag = true;
+	{
+		flag = FALSE;
+	}
+
+	if (flag)
+	{				//Verificamos que se enviaron los comandos validos guardados en ClientInput[]
+		std::cout << "VOY A VERIFICAR /n" << std::endl;
+
+		std::cout << ClientInput << std::endl;
+		
+		std::string stringInpt = ClientInput;
+
+
+
+		std::size_t found = stringInpt.find("/Desktop/trend.txt",0);
+			
+
+		if (found != std::string::npos)
+		{
+			std::cout << "FUE CORRECTO /n" << std::endl;				//Si el input fue correcto vamos a mandarle el archivo al Client
+			answer();
+			server_Output(YES);
+		}
+		else
+		{
+			server_Output(NO);
+		}
+	}
+	wait_connection();		//NO ESTOY SEGURA SI ACA TENDRIA Q COMENTAR ESTO
 
 }
 
