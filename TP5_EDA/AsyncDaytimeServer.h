@@ -21,7 +21,7 @@
 #include <boost/lexical_cast.hpp>
 #include<fstream>
 
-#define MAX 300
+#define MAX 20
 enum result { NO, YES};
 
 class AsyncDaytimeServer

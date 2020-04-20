@@ -62,18 +62,18 @@ void AsyncDaytimeServer::connection_received_cb(const boost::system::error_code&
 		
 		boost::asio::async_read(
 			socket_,
-			boost::asio::buffer(&ClientInput[0],MAX),  //Buffer guarda temrinando en \0
+			boost::asio::buffer(ClientInput),  //Buffer guarda temrinando en \0
 			boost::asio::transfer_all(),
 			boost::bind(&AsyncDaytimeServer::inputHandler,
 				this,
 				boost::asio::placeholders::error,
 				boost::asio::placeholders::bytes_transferred)
 			);	
-
+		
 		if(flag)
 		{				//Verificamos que se enviaron los comandos validos guardados en ClientInput[]
 			std::cout << "VOY A VERIFICAR /n" << std::endl;
-			char validInput[] = "GET/hamachi/trend.txt HTTP/1.1\r\nHost: 25.135.158.40\r\n";
+			char validInput[] = "GET /Desktop/trend.txt HTTP/1.1\r\nHost: 25.135.158.40\r\n";
 			if ((strcmp(ClientInput, validInput)) == 0)
 			{
 				std::cout << "FUE CORRECTO /n" << std::endl;				//Si el input fue correcto vamos a mandarle el archivo al Client
