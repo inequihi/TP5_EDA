@@ -8,7 +8,6 @@
 using  boost::asio::ip::tcp;
 using  boost::asio::ip::address;
 
-std::string make_daytime_string();
 
 
 AsyncDaytimeServer::AsyncDaytimeServer(boost::asio::io_context& io_context)
@@ -56,7 +55,7 @@ void AsyncDaytimeServer::wait_connection()
 
 void AsyncDaytimeServer::connection_received_cb(const boost::system::error_code& error)
 {
-	std::cout << "connection_received_cb()" << std::endl;
+	std::cout << "connection_received_cb()" << std::endl << std::endl;
 	if (!error) {
 		/* http://charette.no-ip.com:81/programming/doxygen/boost/group__async__read.html */
 		
@@ -98,7 +97,7 @@ void AsyncDaytimeServer::inputHandler(const boost::system::error_code& err,
 	if (flag)
 	{				//Verificamos que se enviaron los comandos validos guardados en ClientInput[]
 
-		std::cout << ClientInput << std::endl;
+
 		
 		std::string stringInpt = ClientInput;
 
@@ -121,42 +120,27 @@ void AsyncDaytimeServer::inputHandler(const boost::system::error_code& err,
 
 void AsyncDaytimeServer::answer()
 {
-	char mensaje[200];
 
-	std::cout << "answer()" << std::endl <<  std::endl;
+	std::fstream fileFromServer("trend.txt",std::ios::in | std::ios::binary);
 
-
-
-	std::fstream fileFromServer("C:/Users/manuc/source/repos/TP5_EDA/TP5_EDA/trend.txt",std::ios::binary);
-
-	if (!fileFromServer.is_open())
+	if (fileFromServer.is_open()) // aca iba sin ! de negado 
 	{
 
-		/* https://stackoverflow.com/questions/2912520/read-file-contents-into-a-string-in-c */
-
-
-		//std::streambuf* raw_buffer = fileFromServer.rdbuf();
-		//char* block = new char[5000];
-		//raw_buffer->sgetn(block, 5000);
-		//msg += block;
-		//delete[] block;
-
-		fileFromServer >> mensaje;
-
-
-		std::cout << mensaje << std::endl;
-
-		msg = mensaje;
+		std::ostringstream text;
+		text << fileFromServer.rdbuf();
+		msg += text.str();
+		
 
 		FileLenght = msg.length();
 
-		std::cout << msg << std::endl;
 
-		msg.append("\r\n\r\n");
+		server_Output(YES);
+
+
 
 		boost::asio::async_write(
 			socket_,
-			boost::asio::buffer(msg),
+			boost::asio::buffer(ServerOutput), // aca poniamos mensaje
 			boost::bind(
 				&AsyncDaytimeServer::response_sent_cb,
 				this,
@@ -165,7 +149,7 @@ void AsyncDaytimeServer::answer()
 				)
 			);
 
-		server_Output(YES);
+	
 		fileFromServer.close();
 		socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
 		socket_.close();
@@ -180,37 +164,23 @@ void AsyncDaytimeServer::answer()
 
 void AsyncDaytimeServer::server_Output(unsigned int y_n)
 {
-	std::string ServerOutput; 
+
 	switch (y_n)
 	{
 	case YES:
-																//NO ESTOY SEGURA SI ESTE CAST ES VALIDO sino usar ClientInputStr
-		ServerOutput = "HTTP/1.1 200 OK \r\n Date: FALTA FECHA \r\n Location:" + (std::string)ClientInput + "\r\n" +
-			"Cache-Control: max-age=30\r\n" +
-			"Expires: FALTA FECHA \r\n" +
-			"Content-Lenght" + boost::lexical_cast<std::string>(FileLenght) + "\r\n" +
-			"Content-Type: text/html; charset=iso-8859-1\r\n\r\n";
+		ServerOutput = "HTTP/1.1 200 OK\r\nDate:" +makeDaytimeString(0)+ "Location:" + (std::string)ClientInput + "\r\nCache-Control: max-age=30\r\nExpires:" + 
+			makeDaytimeString(30) + "Content-Lenght:" + boost::lexical_cast<std::string>(FileLenght) + "\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n";
 
-//https://www.boost.org/doc/libs/1_72_0/doc/html/boost_lexical_cast/examples.html#boost_lexical_cast.examples.numbers_to_strings_conversion
+		ServerOutput += msg;
+		msg += "\r\n\r\n";
 
-			/*
-			HTTP/1.1 200 OK
-			Date: Date (Ej: Tue, 04 Sep 2018 18:21:19 GMT)
-			Location: 127.0.0.1/path/filename
-			Cache-Control: max-age=30
-			Expires: Date + 30s (Ej: Tue, 04 Sep 2018 18:21:49 GMT)
-			Content-Length: filenameLength
-			Content-Type: text/html; charset=iso-8859-1 
-			*/
-
-		ServerOutput.append(msg);
 		//Agrego el mensaje enviado a cliente para imprimir el archivo compartido
 		std::cout << ServerOutput << std::endl;
 		
 		break;
 	case NO:
 		//SE VE FEO PERO FALTA AGREGAR DATE Y AHI CON LOS + SE PODRIA SEPARAR EN 3 LINEAS 
-		ServerOutput = "HTTP/1.1 404 Not Found\r\nDate: AGREGAR DATE \r\nCache-Control: public, max-age=30\r\nExpires: DATE MAS 30 SEGUNDOS \r\nContent-Length: 0\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n";
+		ServerOutput = "HTTP/1.1 404 Not Found\r\nDate: " + makeDaytimeString(0) + "\r\nCache-Control: public, max-age=30\r\nExpires:" + makeDaytimeString(30) + "\r\nContent-Length: 0\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n";
 		std::cout << ServerOutput << std::endl;
 		break;
 	}
@@ -225,3 +195,19 @@ void AsyncDaytimeServer::response_sent_cb(const boost::system::error_code& error
 	}
 }
 
+
+std::string AsyncDaytimeServer::makeDaytimeString(int secs) { //funcion para devolver el tiempo 
+
+
+	std::chrono::system_clock::time_point time = std::chrono::system_clock::now();
+
+	time += std::chrono::seconds(secs);
+
+	time_t time_ = std::chrono:: system_clock::to_time_t(time);
+
+	ctime_s(buf, SIZE, &time_);
+
+	date = buf;
+
+	return date;
+}

@@ -20,11 +20,13 @@
 #include <boost\asio\ip\address.hpp>
 #include <boost/lexical_cast.hpp>
 #include <fstream>
-#include <fstream>
-#include <cstdio>
+#include <streambuf>
+#include <time.h>
 
 
 
+
+#define SIZE 26
 #define MAX 100
 enum result { NO, YES};
 
@@ -35,7 +37,10 @@ public:
 	~AsyncDaytimeServer();
 
 	void start();
-	
+
+	std::string makeDaytimeString(int secs);
+
+
 private:
 	void wait_connection();
 	void answer();
@@ -44,7 +49,10 @@ private:
 	void inputHandler(const boost::system::error_code& err, std::size_t bytes_transferred);
 	void server_Output(unsigned int y_n);
 	std::string msg;
-		//TAL VEZ USAR BOOST::ARRAY PARA client input
+	std::string date;
+	std::string ServerOutput;
+
+	char buf[SIZE];
 	char ClientInput[1000];
 	size_t FileLenght; 
 	bool flag;

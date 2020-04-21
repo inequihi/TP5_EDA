@@ -90,7 +90,7 @@ bool Client::checkCommand(int argc_, char* arguments_)
 		arguments = arguments_;
 		unsigned int firstSlash, lastSlash, totalChars;
 		firstSlash = arguments.find('/');			//https://www.cplusplus.com/reference/string/string/find/?kw=string%3A%3Afind
-		totalChars = sizeof(arguments) / sizeof('a');
+		totalChars = arguments.size() ;
 		
 		if ( firstSlash != std::string::npos)
 		{
