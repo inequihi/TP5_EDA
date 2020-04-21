@@ -13,7 +13,7 @@ std::string make_daytime_string();
 
 AsyncDaytimeServer::AsyncDaytimeServer(boost::asio::io_context& io_context)
 	: context_(io_context),
-	acceptor_(io_context, tcp::endpoint(address::from_string("25.135.150.125"), 80)),
+	acceptor_(io_context, tcp::endpoint(address::from_string("25.135.151.200"), 80)),
 	socket_(io_context)
 {
 	
@@ -71,28 +71,7 @@ void AsyncDaytimeServer::connection_received_cb(const boost::system::error_code&
 				boost::asio::placeholders::bytes_transferred)
 			);	
 
-		
-		
-		std::cout << flag << std::endl;
 
-		//if(flag)
-		//{				//Verificamos que se enviaron los comandos validos guardados en ClientInput[]
-		//	std::cout << "VOY A VERIFICAR /n" << std::endl;
-		//	
-		//	std::cout << ClientInput << std::endl;
-
-		//	if ((strcmp(ClientInput, validInput)) == 0)
-		//	{
-		//		std::cout << "FUE CORRECTO /n" << std::endl;				//Si el input fue correcto vamos a mandarle el archivo al Client
-		//		answer();
-		//		server_Output(YES);
-		//	}
-		//	else
-		//	{
-		//		server_Output(NO);
-		//	}
-		//}
-	 //   wait_connection();		//NO ESTOY SEGURA SI ACA TENDRIA Q COMENTAR ESTO
 	}
 	else {
 		std::cout << error.message() << std::endl;
@@ -103,11 +82,11 @@ void AsyncDaytimeServer::connection_received_cb(const boost::system::error_code&
 void AsyncDaytimeServer::inputHandler(const boost::system::error_code& err,
 	std::size_t bytes_transferred)
 {
-	std::cout << "checkClientInput()\n" << std::endl;
+
 	//char validInput[] = "GET /Desktop/trend.txt HTTP/1.1\r\nHost: 25.135.150.125\r\n Accept: */*\r\n\r\n";
 	if (!err)
 	{
-		std::cout << " No hay Error en client input \n";
+		std::cout << "No hay Error en client input " << std::endl;
 		
 		flag = TRUE;
 	}
@@ -118,22 +97,18 @@ void AsyncDaytimeServer::inputHandler(const boost::system::error_code& err,
 
 	if (flag)
 	{				//Verificamos que se enviaron los comandos validos guardados en ClientInput[]
-		std::cout << "VOY A VERIFICAR /n" << std::endl;
 
 		std::cout << ClientInput << std::endl;
 		
 		std::string stringInpt = ClientInput;
 
 
-
-		std::size_t found = stringInpt.find("/Desktop/trend.txt",0);
-			
+		std::size_t found = stringInpt.find("/TP5_EDA/trend.txt",0);
+		
 
 		if (found != std::string::npos)
 		{
-			std::cout << "FUE CORRECTO /n" << std::endl;				//Si el input fue correcto vamos a mandarle el archivo al Client
 			answer();
-			server_Output(YES);
 		}
 		else
 		{
@@ -146,18 +121,28 @@ void AsyncDaytimeServer::inputHandler(const boost::system::error_code& err,
 
 void AsyncDaytimeServer::answer()
 {
-	std::cout << "answer()" << std::endl;
-	//msg = make_daytime_string();
 
-	std::fstream fileFromServer("WantThisFile.txt",std::ios::in);			
+	std::cout << "answer()" << std::endl <<  std::endl;
+
+
+	std::fstream fileFromServer("C:/Users/manuc/source/repos/TP5_EDA/TP5_EDA/trend.txt",std::ios::binary);
 
 	if (!fileFromServer.is_open())
 	{
+
 		/* https://stackoverflow.com/questions/2912520/read-file-contents-into-a-string-in-c */
-		std::cout << "OPENED FILE\n" << std::endl; 
-		msg.assign((std::istreambuf_iterator<char>(fileFromServer)),
-			(std::istreambuf_iterator<char>()));
+
+
+		std::streambuf* raw_buffer = fileFromServer.rdbuf();
+
+		char* block = new char[5000];
+		raw_buffer->sgetn(block, 5000);
+
+		msg += block;
+		delete[] block;
+
 		FileLenght = msg.length();
+
 		msg.append("\r\n\r\n");
 
 		boost::asio::async_write(
@@ -171,6 +156,7 @@ void AsyncDaytimeServer::answer()
 				)
 			);
 
+		server_Output(YES);
 		fileFromServer.close();
 		socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
 		socket_.close();
@@ -230,37 +216,3 @@ void AsyncDaytimeServer::response_sent_cb(const boost::system::error_code& error
 	}
 }
 
-
-std::string make_daytime_string()
-{	
-char CR = 0x0D;
-	char LF = 0x0A;
-	std::string msg1("HTTP/11.1 404 NOT FOUND ");
-	std::string msg2("DATE: CRLF");
-	std::string msg3("CACHE-CONTROL CRLF");
-	std::string msg4("EXPIRES: CRLF");
-	std::string msg5("LENGTH CRLF");
-	std::string msg6("type CRLF");
-
-
-	msg1 += CR;
-	msg1 += LF;
-
-	msg2 += CR;
-	msg2 += LF;
-
-	msg3 += CR;
-	msg3 += LF;
-
-	msg4 += CR;
-	msg4 += LF;
-
-
-	msg5 += CR;
-	msg5 += LF;
-
-	msg6 += CR;
-	msg6 += LF;
-
-	return msg1 + msg2 + msg3 + msg4 + msg5 + msg6;
-}

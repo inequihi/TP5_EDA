@@ -11,8 +11,9 @@ int main(int argc, char** argv)		//Por comando recibo host/path/filename
 				//Leemos y usamos resultados
 				if (client.storeMyFile())
 				{
-					
+					printf(" \n\n ente \n\n");
 				}
+				printf(" \n\n sali \n\n");
 			}
 			else
 				curl_easy_cleanup(client.getCurlhand());		//Hubo un error asi que libero handler

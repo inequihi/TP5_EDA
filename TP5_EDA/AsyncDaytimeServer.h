@@ -19,7 +19,10 @@
 #include <string>
 #include <boost\asio\ip\address.hpp>
 #include <boost/lexical_cast.hpp>
-#include<fstream>
+#include <fstream>
+#include <fstream>
+
+
 
 #define MAX 100
 enum result { NO, YES};
