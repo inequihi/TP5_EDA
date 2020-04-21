@@ -38,7 +38,7 @@ public:
 	
 private:
 	void wait_connection();
-	void answer();
+	void answer(unsigned int y_n);
 	void connection_received_cb(const boost::system::error_code& error);
 	void response_sent_cb(const boost::system::error_code& error, size_t bytes_sent);
 	void inputHandler(const boost::system::error_code& err, std::size_t bytes_transferred);

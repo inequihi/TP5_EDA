@@ -82,77 +82,52 @@ void AsyncDaytimeServer::connection_received_cb(const boost::system::error_code&
 void AsyncDaytimeServer::inputHandler(const boost::system::error_code& err,
 	std::size_t bytes_transferred)
 {
-
-	//char validInput[] = "GET /Desktop/trend.txt HTTP/1.1\r\nHost: 25.135.150.125\r\n Accept: */*\r\n\r\n";
 	if (!err)
 	{
-		std::cout << "No hay Error en client input " << std::endl;
-		
-		flag = TRUE;
-	}
-	else
-	{
-		flag = FALSE;
-	}
-
-	if (flag)
-	{				//Verificamos que se enviaron los comandos validos guardados en ClientInput[]
 
 		std::cout << ClientInput << std::endl;
-		
 		std::string stringInpt = ClientInput;
+		std::size_t found = stringInpt.find("/TP5_EDA/trend.txt", 0);
 
-
-		std::size_t found = stringInpt.find("/TP5_EDA/trend.txt",0);
-		
-
+		//Si no hay error en Client Input 
 		if (found != std::string::npos)
 		{
-			answer();
+			answer(YES);
 		}
 		else
 		{
-			server_Output(NO);
+			answer(NO);
 		}
 	}
-	wait_connection();		//NO ESTOY SEGURA SI ACA TENDRIA Q COMENTAR ESTO
+	else
+	{
+		//ACA CLOSE ??
+	}
+
+	wait_connection();		
 
 }
 
-void AsyncDaytimeServer::answer()
+void AsyncDaytimeServer::answer(unsigned int y_n)
 {
-	char mensaje[200];
-
 	std::cout << "answer()" << std::endl <<  std::endl;
 
+	std::fstream fileFromServer("C:/Users/manuc/source/repos/TP5_EDA/TP5_EDA/trend.txt",std::ios::in | std::ios::binary);
 
-
-	std::fstream fileFromServer("C:/Users/manuc/source/repos/TP5_EDA/TP5_EDA/trend.txt",std::ios::binary);
-
-	if (!fileFromServer.is_open())
+	if (!fileFromServer.is_open() && (y_n == YES))
 	{
-
-		/* https://stackoverflow.com/questions/2912520/read-file-contents-into-a-string-in-c */
-
-
-		//std::streambuf* raw_buffer = fileFromServer.rdbuf();
-		//char* block = new char[5000];
-		//raw_buffer->sgetn(block, 5000);
-		//msg += block;
-		//delete[] block;
-
-		fileFromServer >> mensaje;
-
-
-		std::cout << mensaje << std::endl;
-
-		msg = mensaje;
-
+		std::ostringstream msgStream;
+		msgStream << fileFromServer.rdbuf();
+		msg += msgStream.str();
 		FileLenght = msg.length();
-
-		std::cout << msg << std::endl;
-
 		msg.append("\r\n\r\n");
+		server_Output(YES);
+		fileFromServer.close();
+	}
+	else
+	{
+		server_Output(NO);
+	}
 
 		boost::asio::async_write(
 			socket_,
@@ -165,16 +140,8 @@ void AsyncDaytimeServer::answer()
 				)
 			);
 
-		server_Output(YES);
-		fileFromServer.close();
 		socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
 		socket_.close();
-
-	}
-	else
-	{
-		std::cout << "No se puso abrir archivo" << std::endl;		//El archivo esta (ya que paso la prueba de CheckClientInput) pero no se pudo abrir
-	}
 
 }
 
@@ -192,16 +159,6 @@ void AsyncDaytimeServer::server_Output(unsigned int y_n)
 			"Content-Type: text/html; charset=iso-8859-1\r\n\r\n";
 
 //https://www.boost.org/doc/libs/1_72_0/doc/html/boost_lexical_cast/examples.html#boost_lexical_cast.examples.numbers_to_strings_conversion
-
-			/*
-			HTTP/1.1 200 OK
-			Date: Date (Ej: Tue, 04 Sep 2018 18:21:19 GMT)
-			Location: 127.0.0.1/path/filename
-			Cache-Control: max-age=30
-			Expires: Date + 30s (Ej: Tue, 04 Sep 2018 18:21:49 GMT)
-			Content-Length: filenameLength
-			Content-Type: text/html; charset=iso-8859-1 
-			*/
 
 		ServerOutput.append(msg);
 		//Agrego el mensaje enviado a cliente para imprimir el archivo compartido
