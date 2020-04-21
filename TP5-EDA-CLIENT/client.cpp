@@ -119,7 +119,6 @@ bool Client::storeMyFile(void)
 		MyFile.write(this->userFileData.memory, this->userFileData.size);		//escribo lo que me devolvio server en un archivo
 
 		MyFile.close();
-		cout << "ARCHIVO txt CREADO Y GUARDADO" << endl;
 		return true;
 	}
 	else
@@ -141,7 +140,6 @@ size_t write_callback(char* contents, size_t size, size_t cantmemb, void* Curren
 		printf("not enough memory (realloc returned NULL)\n");
 		return 0;
 	}
-//	printf("\n\n SOY CALLBAAACKKK \n\n");
 	mem->memory = ptr;
 	memcpy(&(mem->memory[mem->size]), contents, realsize);
 	mem->size += realsize;

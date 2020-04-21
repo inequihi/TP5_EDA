@@ -41,6 +41,7 @@ public:
 	std::string makeDaytimeString(int secs);
 
 
+
 private:
 	void wait_connection();
 	void answer();
@@ -51,6 +52,7 @@ private:
 	std::string msg;
 	std::string date;
 	std::string ServerOutput;
+
 
 	char buf[SIZE];
 	char ClientInput[1000];

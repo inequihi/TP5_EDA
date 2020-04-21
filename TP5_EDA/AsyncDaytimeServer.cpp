@@ -38,6 +38,7 @@ void AsyncDaytimeServer::start()
 void AsyncDaytimeServer::wait_connection()
 {
 	std::cout << "wait_connection()" << std::endl;
+
 	if (socket_.is_open())
 	{
 		std::cout << "Error: Can't accept new connection from an open socket" << std::endl;
@@ -57,7 +58,7 @@ void AsyncDaytimeServer::connection_received_cb(const boost::system::error_code&
 {
 	std::cout << "connection_received_cb()" << std::endl << std::endl;
 	if (!error) {
-		/* http://charette.no-ip.com:81/programming/doxygen/boost/group__async__read.html */
+																	/* http://charette.no-ip.com:81/programming/doxygen/boost/group__async__read.html */
 		
 
 		socket_.async_receive(
@@ -77,15 +78,13 @@ void AsyncDaytimeServer::connection_received_cb(const boost::system::error_code&
 	}
 }
 
-//VER DESPS SI ME CONVIENE PASARLE bytes_transferred A ANSWER()
 void AsyncDaytimeServer::inputHandler(const boost::system::error_code& err,
 	std::size_t bytes_transferred)
 {
 
-	//char validInput[] = "GET /Desktop/trend.txt HTTP/1.1\r\nHost: 25.135.150.125\r\n Accept: */*\r\n\r\n";
 	if (!err)
 	{
-		std::cout << "No hay Error en client input " << std::endl;
+		std::cout << "No hay Error en client input " << std::endl << std::endl; // recive bien parametros de ckient 
 		
 		flag = TRUE;
 	}
@@ -112,9 +111,22 @@ void AsyncDaytimeServer::inputHandler(const boost::system::error_code& err,
 		else
 		{
 			server_Output(NO);
+			boost::asio::async_write(
+				socket_,
+				boost::asio::buffer(ServerOutput), // aca poniamos mensaje
+				boost::bind(
+					&AsyncDaytimeServer::response_sent_cb,
+					this,
+					boost::asio::placeholders::error,
+					boost::asio::placeholders::bytes_transferred
+				)
+			);
+
+			socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
+			socket_.close();
 		}
 	}
-	wait_connection();		//NO ESTOY SEGURA SI ACA TENDRIA Q COMENTAR ESTO
+	wait_connection();		
 
 }
 
@@ -153,34 +165,38 @@ void AsyncDaytimeServer::answer()
 		fileFromServer.close();
 		socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
 		socket_.close();
+		
 
 	}
 	else
 	{
 		std::cout << "No se puso abrir archivo" << std::endl;		//El archivo esta (ya que paso la prueba de CheckClientInput) pero no se pudo abrir
+
 	}
 
 }
 
 void AsyncDaytimeServer::server_Output(unsigned int y_n)
 {
-
+	std::string hoy = "HOY";
 	switch (y_n)
 	{
 	case YES:
-		ServerOutput = "HTTP/1.1 200 OK\r\nDate:" +makeDaytimeString(0)+ "Location:" + (std::string)ClientInput + "\r\nCache-Control: max-age=30\r\nExpires:" + 
-			makeDaytimeString(30) + "Content-Lenght:" + boost::lexical_cast<std::string>(FileLenght) + "\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n";
+		ServerOutput="HTTP/1.1 200 OK\r\nDate:" + makeDaytimeString(0) + "Location: " + "C:/Users/manuc/source/repos/TP5_EDA/TP5_EDA/trend.txt" + "\r\nCache-Control: max-age=30\r\nExpires:" +
+			makeDaytimeString(30) + "Content-Length:" + boost::lexical_cast<std::string>(FileLenght) +
+			"\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n";
+
 
 		ServerOutput += msg;
-		msg += "\r\n\r\n";
+		ServerOutput += "\r\n\r\n";
 
 		//Agrego el mensaje enviado a cliente para imprimir el archivo compartido
 		std::cout << ServerOutput << std::endl;
 		
 		break;
 	case NO:
-		//SE VE FEO PERO FALTA AGREGAR DATE Y AHI CON LOS + SE PODRIA SEPARAR EN 3 LINEAS 
-		ServerOutput = "HTTP/1.1 404 Not Found\r\nDate: " + makeDaytimeString(0) + "\r\nCache-Control: public, max-age=30\r\nExpires:" + makeDaytimeString(30) + "\r\nContent-Length: 0\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n";
+
+		ServerOutput = "HTTP/1.1 404 Not Found\r\nDate:" + makeDaytimeString(0) + "Cache-Control: public, max-age=30\r\nExpires:" + makeDaytimeString(30) + "Content-Length: 0\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n";
 		std::cout << ServerOutput << std::endl;
 		break;
 	}
@@ -203,11 +219,14 @@ std::string AsyncDaytimeServer::makeDaytimeString(int secs) { //funcion para dev
 
 	time += std::chrono::seconds(secs);
 
-	time_t time_ = std::chrono:: system_clock::to_time_t(time);
+	time_t time_ = std::chrono::system_clock::to_time_t(time);
 
-	ctime_s(buf, SIZE, &time_);
-
-	date = buf;
-
-	return date;
+	//	ctime_s(buf, SIZE, &time_);
+	//
+	//	date = buf;
+	//	date.resize(date.length() - 1);
+	//
+	//	return date;
+	//}
+	return ctime(&time_);
 }
