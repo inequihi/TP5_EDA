@@ -121,8 +121,10 @@ void AsyncDaytimeServer::inputHandler(const boost::system::error_code& err,
 
 void AsyncDaytimeServer::answer()
 {
+	char mensaje[200];
 
 	std::cout << "answer()" << std::endl <<  std::endl;
+
 
 
 	std::fstream fileFromServer("C:/Users/manuc/source/repos/TP5_EDA/TP5_EDA/trend.txt",std::ios::binary);
@@ -133,15 +135,22 @@ void AsyncDaytimeServer::answer()
 		/* https://stackoverflow.com/questions/2912520/read-file-contents-into-a-string-in-c */
 
 
-		std::streambuf* raw_buffer = fileFromServer.rdbuf();
+		//std::streambuf* raw_buffer = fileFromServer.rdbuf();
+		//char* block = new char[5000];
+		//raw_buffer->sgetn(block, 5000);
+		//msg += block;
+		//delete[] block;
 
-		char* block = new char[5000];
-		raw_buffer->sgetn(block, 5000);
+		fileFromServer >> mensaje;
 
-		msg += block;
-		delete[] block;
+
+		std::cout << mensaje << std::endl;
+
+		msg = mensaje;
 
 		FileLenght = msg.length();
+
+		std::cout << msg << std::endl;
 
 		msg.append("\r\n\r\n");
 
