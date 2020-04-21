@@ -102,6 +102,8 @@ void AsyncDaytimeServer::inputHandler(const boost::system::error_code& err,
 	else
 	{
 		//ACA CLOSE ??
+		socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
+		socket_.close();
 	}
 
 	wait_connection();		
