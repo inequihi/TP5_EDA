@@ -1,10 +1,4 @@
-Í
-Cache-Control: max-age=30
-Expires:Tue Apr 21 14:54:13 2020
-Content-Lenght:12329
-Content-Type: text/html; charset=iso-8859-1
-
-<!DOCTYPE html>
+Í<!DOCTYPE html>
 <!-- saved from url=(0026)https://www.cplusplus.com/ -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 

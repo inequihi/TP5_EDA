@@ -117,7 +117,7 @@ bool Client::storeMyFile(void)
 	if (MyFile.is_open())		//verifico si se creo y puedo abrirlo
 	{
 		MyFile.write(this->userFileData.memory, this->userFileData.size);		//escribo lo que me devolvio server en un archivo
-
+		cout << this->userFileData.memory << endl;
 		MyFile.close();
 		return true;
 	}
