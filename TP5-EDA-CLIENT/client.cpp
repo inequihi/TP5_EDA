@@ -18,13 +18,18 @@ Client::Client(int argc_, char* argv_)
 			if (curl_handler)
 			{
 				curl_initial_set();
-				userFileData.memory = (char*)malloc(1000);
+				userFileData.memory = (char*)malloc(10000);		//Reservamos memoria para informacion recibida por server
 				userFileData.size = 1;
 
 			}
 		}
+		this->error = CURLE_OK;
 	}
-
+	else
+	{
+		this->error = (CURLcode)CURLE_NOTOK;
+		cout << "Error en client command input" << this->error << endl;
+	}
 }
 
 
@@ -35,17 +40,12 @@ Client::~Client()
 	curl_global_cleanup();
 }
 
-
-
-
 /*     SETTER   */
-
-
 
 void Client::setErr(CURLcode err) { error = err; };   
 
 
-/*     GETTER   */ 
+/*     GETTERS   */ 
 
 
 CURLcode Client::getErr() { return error; };  
@@ -56,10 +56,9 @@ CURL* Client::getCurlhand() { return curl_handler; };
 /*     FUNCIONES MIEMBRO   */
 
 
-
 void Client::curl_initial_set()
 {
-	curl_easy_setopt(curl_handler, CURLOPT_URL, (this->Cmd4Server).c_str());
+	curl_easy_setopt(curl_handler, CURLOPT_URL,this->Cmd4Server.c_str());
 	curl_easy_setopt(curl_handler, CURLOPT_PORT, 80);				//Escuchamos puerto 80
 	curl_easy_setopt(curl_handler, CURLOPT_VERBOSE, 1L);
 	curl_easy_setopt(curl_handler, CURLOPT_PROTOCOLS, CURLPROTO_HTTP);
@@ -68,51 +67,45 @@ void Client::curl_initial_set()
 
 }
 
-/*
-void Client::curl_initial_set()
-{
-	curl_easy_setopt(curl_handler, CURLOPT_URL, "http://www.policiactes.gov.ar/");			
-	curl_easy_setopt(curl_handler, CURLOPT_PORT, 80);				//Escuchamos puerto 80
-	curl_easy_setopt(curl_handler, CURLOPT_VERBOSE, 1L);
-	curl_easy_setopt(curl_handler, CURLOPT_PROTOCOLS,CURLPROTO_HTTP);
-	curl_easy_setopt(curl_handler, CURLOPT_WRITEDATA, (void*)&userFileData);	//Paso la data guardada por callback en this->userData a donde???
-	curl_easy_setopt(curl_handler, CURLOPT_WRITEFUNCTION, &write_callback);	//Mando toda la data recibida a funcion callback 
-}
-*/
-
 bool Client::checkCommand(int argc_, char* arguments_)
 {
-	std::string arguments;
-
-
-	if (argc_ == 2)
+	bool ChkResult = true;
+	if (argc_ == 2)		//Si tenemos mas de dos argumentos el input por comando es erroneo
 	{
+		std::string arguments;
 		arguments = arguments_;
-		unsigned int firstSlash, lastSlash, totalChars;
-		firstSlash = arguments.find('/');			//https://www.cplusplus.com/reference/string/string/find/?kw=string%3A%3Afind
-		totalChars = arguments.size() ;
-		
-		if ( firstSlash != std::string::npos)
+
+		//Buscamos posiciones de el primer y ultimo '/' en el input para separar host de /path/filename
+		size_t firstSlash, totalChars, lastSlash;
+		firstSlash = arguments.find('/');
+		totalChars = arguments.size();
+
+		if (firstSlash != std::string::npos)		//Si recibimos path/file proseguimos
 		{
-			this->host.assign(arguments, 0, firstSlash);					//Le cargo el host a la clase
+			//Separamos host del path
+			this->host.assign(arguments, 0, firstSlash);					//Asignamos host a la clase
 			this->path.assign(arguments, firstSlash + 1, totalChars - firstSlash + 1);   //Le cargo path a la clase
 
-			this->Cmd4Server = this->host + '/' + this->path;
+			lastSlash = arguments.find_last_of('/');
+			this->filename.assign(arguments, lastSlash + 1, totalChars);
 			
-			//cout << this->host << endl << this->path << endl;
+			//El server recibira "host/path/filename"
+			this->Cmd4Server = this->host + '/' + this->path;
 		}
-
-		return true;
+		else
+			ChkResult = false;
 	}
-	else 
-		return false;
+	else
+		ChkResult = false;
+
+	return ChkResult;
 }
 	
 
 bool Client::storeMyFile(void)
 {
 	std::ofstream MyFile;
-	MyFile.open("MyNewData.txt", ios::binary);		//creo archivo 
+	MyFile.open(this->filename.c_str(), ios::binary);		//creo archivo 
 
 	if (MyFile.is_open())		//verifico si se creo y puedo abrirlo
 	{
