@@ -10,7 +10,9 @@
 #include <fstream>				//Uso lireria fstream para leer y escribir archivos (aunque aca solo escribamos)
 
 #define MAXTOKENS 30
-#define CURLE_NOTOK 1;
+#define CURLE_NOTOK 1
+#define MAXFILESIZE 10000
+
 using namespace std; 
 
 typedef struct 

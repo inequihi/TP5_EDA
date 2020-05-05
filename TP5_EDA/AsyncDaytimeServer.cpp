@@ -15,8 +15,7 @@ AsyncDaytimeServer::AsyncDaytimeServer(boost::asio::io_context& io_context)
 	acceptor_(io_context, tcp::endpoint(address::from_string("25.135.151.200"), 80)),
 	socket_(io_context)
 {
-	
-	
+	FileLenght = 0;	
 }
 
 
@@ -58,8 +57,6 @@ void AsyncDaytimeServer::connection_received_cb(const boost::system::error_code&
 {
 	std::cout << "connection_received_cb()" << std::endl << std::endl;
 	if (!error) {
-																	/* http://charette.no-ip.com:81/programming/doxygen/boost/group__async__read.html */
-		
 
 		socket_.async_receive(
 			
@@ -70,7 +67,6 @@ void AsyncDaytimeServer::connection_received_cb(const boost::system::error_code&
 				boost::asio::placeholders::error,
 				boost::asio::placeholders::bytes_transferred)
 			);	
-
 
 	}
 	else {

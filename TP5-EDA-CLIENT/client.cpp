@@ -18,17 +18,17 @@ Client::Client(int argc_, char* argv_)
 			if (curl_handler)
 			{
 				curl_initial_set();
-				userFileData.memory = (char*)malloc(10000);		//Reservamos memoria para informacion recibida por server
+				userFileData.memory = (char*)malloc(MAXFILESIZE);		//Reservamos memoria para informacion recibida por server
 				userFileData.size = 1;
 
 			}
 		}
-		this->error = CURLE_OK;
+		error = CURLE_OK;
 	}
 	else
 	{
-		this->error = (CURLcode)CURLE_NOTOK;
-		cout << "Error en client command input" << this->error << endl;
+		error = (CURLcode)CURLE_NOTOK;
+		cout << "Error en client command input" << error << endl;			//Mejor manejar esto de otra forma, no esta bueno q constructor imprima
 	}
 }
 
@@ -37,6 +37,12 @@ Client::Client(int argc_, char* argv_)
 
 Client::~Client()
 {
+	if (userFileData.memory)
+	{
+		userFileData.memory = NULL;
+		free(userFileData.memory);
+	}
+
 	curl_global_cleanup();
 }
 
@@ -105,7 +111,7 @@ bool Client::checkCommand(int argc_, char* arguments_)
 bool Client::storeMyFile(void)
 {
 	std::ofstream MyFile;
-	MyFile.open(this->filename.c_str(), ios::binary);		//creo archivo 
+	MyFile.open("Myfile.html", ios::binary);		//creo archivo 
 
 	if (MyFile.is_open())		//verifico si se creo y puedo abrirlo
 	{

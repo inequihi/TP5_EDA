@@ -9,8 +9,6 @@ int main(int argc, char* argv[])
 {
     try
     {
-        
-
         boost::asio::io_context io_context;
 
         AsyncDaytimeServer s(io_context);
